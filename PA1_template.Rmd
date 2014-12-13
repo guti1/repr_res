@@ -1,0 +1,70 @@
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
+
+
+## Loading and preprocessing the data
+
+
+
+```{r}
+if(!file.exists("activity.zip")) {
+        temp <- tempfile()
+        download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip",temp)
+        unzip(temp)
+        unlink(temp)
+}
+
+data <- read.csv("activity.csv")
+```
+
+## What is mean total number of steps taken per day?
+
+
+```{r}
+steps_day <- aggregate(steps ~ date, data, sum)
+hist(steps_day$steps, main = paste("Total Steps per Day"), col="red", xlab="Number of Steps")
+```
+
+```{r}
+rmean <- mean(steps_day$steps)
+rmedian <- median(steps_day$steps)
+```
+
+The mean is 10766 steps, the median is 1765.
+
+
+## What is the average daily activity pattern?
+
+
+Time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
+
+
+```{r}
+
+steps_interval <- aggregate(steps ~ interval, data, mean)
+
+plot(steps_interval$interval,steps_interval$steps, type="l", xlab="Interval", ylab="Number of Steps",main="Average Number of Steps per Day by 5 min intervals")
+
+
+```
+
+The 5-minute interval, on average across all the days in the dataset, containing the maximum number of steps:
+
+```{r}
+max_interval <- steps_interval[which.max(steps_interval$steps),1]
+
+```
+
+
+
+
+
+## Imputing missing values
+
+
+
+## Are there differences in activity patterns between weekdays and weekends?

@@ -1,0 +1,35 @@
+---
+title: "Peer Assessment 1"
+author: "János Gutmayer"
+date: "Saturday, December 13, 2014"
+output: html_document
+---
+
+## Loading and preprocessing the data
+
+
+```{r}
+if(!file.exists("activity.zip")) {
+        temp <- tempfile()
+        download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip",temp)
+        unzip(temp)
+        unlink(temp)
+}
+
+data <- read.csv("activity.csv")
+```
+
+## What is mean total number of steps taken per day?
+
+
+```{r}
+steps_day <- aggregate(steps ~ date, data, sum)
+hist(steps_day$steps, main = paste("Total Steps per Day"), col="red", xlab="Number of Steps")
+```
+
+```{r}
+rmean <- mean(steps_day$steps)
+rmedian <- median(steps_day$steps)
+```
+
+
