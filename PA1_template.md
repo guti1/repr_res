@@ -92,7 +92,7 @@ steps_day_i <- aggregate(steps ~ date, imputed_data, sum)
 hist(steps_day_i$steps, main = paste("Total Steps Each Day"), col="red", xlab="Number of Steps")
 
 #Create Histogram to show difference. 
-hist(steps_day$steps, main = paste("Total Steps Each Day"), col="blue", xlab="Number of Steps", add=T)
+hist(steps_day$steps, main = paste("Total Steps per Day"), col="blue", xlab="Number of Steps", add=T)
 legend("topright", c("Imputed", "Non-imputed"), col=c("red", "blue"), lwd=10)
 ```
 
@@ -113,6 +113,8 @@ Calculating difference between imputed and non-imputed data.
 mean_diff <- rmean.i - rmean
 med_diff <- rmedian.i - rmedian
 ```
+The imputed mean is 10589.7, the new median is 10766.2, the differences respectively -176.49 and 1.188. 
+
 
 Calculating total difference.
 
@@ -120,7 +122,7 @@ Calculating total difference.
 ```r
 total_diff <- sum(steps_day_i$steps) - sum(steps_day$steps)
 ```
-
+ The total difference is 75363.
 
 
 
